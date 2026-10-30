@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9f8d5">
+  <meta name="description" content="Aprende a contar, sumar y restar con los animales de La Jungla de los Números.">
+  <title>La Jungla de los Números</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="jungle-panorama" aria-hidden="true">
+    <div class="panorama-layer panorama-far">
+      <span class="panorama-object panorama-sun">☀️</span>
+      <span class="panorama-object panorama-left-tree">🌴</span>
+      <span class="panorama-object panorama-right-tree">🌴</span>
+      <span class="panorama-object panorama-left-bird">🦜</span>
+      <span class="panorama-object panorama-right-bird">🦋</span>
+      <span class="panorama-object panorama-toucan">🦚</span>
+      <span class="panorama-object panorama-monkey">🐒</span>
+      <span class="panorama-object panorama-sloth">🦥</span>
+    </div>
+    <div class="panorama-layer panorama-near">
+      <span class="panorama-object panorama-left-flower">🌺</span>
+      <span class="panorama-object panorama-right-flower">🌼</span>
+      <span class="panorama-object panorama-left-leaf">🍃</span>
+      <span class="panorama-object panorama-right-leaf">🌿</span>
+      <span class="panorama-object panorama-frog">🐸</span>
+      <span class="panorama-object panorama-tiger">🐯</span>
+      <span class="panorama-object panorama-parrot">🦜</span>
+      <span class="panorama-object panorama-elephant">🐘</span>
+      <span class="panorama-object panorama-vine">🌿</span>
+      <span class="panorama-hint">¡Explora la jungla a tu alrededor!</span>
+    </div>
+  </div>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="La Jungla de los Números, inicio" data-action="home">
+        <span class="brand-icon" aria-hidden="true">🌴</span>
+        <span>La Jungla de los Números</span>
+      </a>
+      <div class="top-actions">
+        <div class="score-pill" aria-label="Puntos acumulados">
+          <span aria-hidden="true">⭐</span>
+          <span id="score-total">0</span>
+          <span class="score-label">puntos</span>
+        </div>
+        <button class="icon-button" id="sound-toggle" type="button" aria-label="Desactivar música y efectos" aria-pressed="true">
+          <span aria-hidden="true" id="sound-icon">🔇</span>
+          <span class="control-label">Efectos</span>
+        </button>
+        <button class="icon-button reset-button" id="reset-button" type="button" aria-label="Reiniciar toda la partida">
+          <span aria-hidden="true">↻</span>
+          <span class="control-label">Reiniciar</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="screen home-screen" id="screen-home" aria-labelledby="home-title">
+        <div class="home-art" aria-hidden="true">
+          <span class="decor decor-leaf leaf-one">🌿</span>
+          <span class="decor decor-leaf leaf-two">🍃</span>
+          <span class="decor decor-flower flower-one">🌼</span>
+          <span class="decor decor-flower flower-two">🌺</span>
+          <span class="decor decor-bird">🦜</span>
+          <div class="monkey mascot">🐵</div>
+          <span class="decor decor-banana">🍌</span>
+          <span class="decor decor-butterfly">🦋</span>
+          <div class="art-caption">¡La aventura empieza aquí!</div>
+        </div>
+        <div class="home-copy">
+          <span class="eyebrow">¡Hola, explorador!</span>
+          <h1 id="home-title">La Jungla<br><span>de los Números</span></h1>
+          <p>Ayuda a nuestros amigos a encontrar frutas, contar estrellas y resolver divertidos retos.</p>
+          <div class="home-highlights">
+            <span>🔢 Aprende números</span>
+            <span>🍍 Cuenta y resuelve</span>
+            <span>🏅 ¡Gana medallas!</span>
+          </div>
+          <div class="discovery-corner" aria-labelledby="discovery-title">
+            <h2 id="discovery-title">¡Descubre formas y colores!</h2>
+            <div class="discovery-options">
+              <button class="discovery-card" type="button" data-discovery="El círculo es redondo, como el sol. ¡Amarillo como una banana!" aria-label="Descubrir el círculo amarillo">
+                <span class="shape shape-circle" aria-hidden="true"></span>
+                <span>Círculo</span>
+              </button>
+              <button class="discovery-card" type="button" data-discovery="El cuadrado tiene cuatro lados iguales. ¡Azul como el cielo!" aria-label="Descubrir el cuadrado azul">
+                <span class="shape shape-square" aria-hidden="true"></span>
+                <span>Cuadrado</span>
+              </button>
+              <button class="discovery-card" type="button" data-discovery="El triángulo tiene tres lados. ¡Rosa como una flor!" aria-label="Descubrir el triángulo rosa">
+                <span class="shape shape-triangle" aria-hidden="true"></span>
+                <span>Triángulo</span>
+              </button>
+            </div>
+            <p class="discovery-feedback" id="discovery-feedback" role="status" aria-live="polite">Toca una figura para descubrirla.</p>
+          </div>
+          <button class="primary-button play-button" type="button" data-action="show-map">
+            <span>¡JUGAR!</span><span aria-hidden="true">🌟</span>
+          </button>
+          <p class="saved-note" id="saved-note"></p>
+        </div>
+      </section>
+
+      <section class="screen map-screen hidden" id="screen-map" aria-labelledby="map-title">
+        <div class="section-heading">
+          <button class="back-button" type="button" data-action="home">← Inicio</button>
+          <div>
+            <span class="eyebrow">Tu aventura</span>
+            <h1 id="map-title">Mapa de la jungla</h1>
+            <p>Elige un camino y sigue aprendiendo a tu ritmo.</p>
+          </div>
+          <div class="map-trophy" aria-hidden="true">🏆</div>
+        </div>
+        <div class="map-progress" aria-live="polite">
+          <span>Tu progreso</span>
+          <div class="map-progress-track"><span id="map-progress-fill"></span></div>
+          <strong id="map-progress-text">0 de 10</strong>
+        </div>
+        <div class="level-grid" id="level-grid" aria-label="Niveles de la aventura"></div>
+      </section>
+
+      <section class="screen game-screen hidden" id="screen-game" aria-labelledby="question-title">
+        <div class="question-island-scene" aria-hidden="true">
+          <div class="question-island-base"></div>
+          <div class="question-island-orbit">
+            <span class="island-scene-animal island-animal-one">🦜</span>
+            <span class="island-scene-animal island-animal-two">🐒</span>
+            <span class="island-scene-animal island-animal-three">🐘</span>
+            <span class="island-scene-animal island-animal-four">🐯</span>
+            <span class="island-scene-animal island-animal-five">🐸</span>
+            <span class="island-scene-animal island-animal-six">🦋</span>
+            <span class="island-scene-plant island-plant-one">🌴</span>
+            <span class="island-scene-plant island-plant-two">🌺</span>
+            <span class="island-scene-plant island-plant-three">🌿</span>
+          </div>
+        </div>
+        <div class="game-topline">
+          <button class="back-button" type="button" data-action="show-map">← Mapa</button>
+          <div class="level-chip" id="game-level-label">Nivel 1</div>
+          <div class="question-count" id="question-count">Pregunta 1 de 5</div>
+        </div>
+        <div class="question-progress" role="progressbar" aria-label="Progreso del nivel" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1">
+          <div class="question-progress-fill" id="question-progress-fill"></div>
+          <div class="question-trail" id="question-trail" aria-hidden="true">
+            <span class="trail-step">🌱</span>
+            <span class="trail-step">🍃</span>
+            <span class="trail-step">🌼</span>
+            <span class="trail-step">🍊</span>
+            <span class="trail-step">🏆</span>
+          </div>
+        </div>
+        <div class="game-card">
+          <div class="question-guide" aria-hidden="true">
+            <span class="question-guide-animal" id="question-guide-animal">🐵</span>
+            <span class="question-guide-message" id="question-guide-message">¡Vamos a jugar!</span>
+          </div>
+          <span class="eyebrow question-topic" id="question-topic">Explorando</span>
+          <h1 id="question-title">¡Vamos a jugar!</h1>
+          <div class="question-visual" id="question-visual"></div>
+          <div class="number-path hidden" id="number-path">
+            <p class="activity-prompt" id="number-path-prompt"></p>
+            <div class="number-path-buttons" id="number-path-buttons" role="group" aria-label="Camino numérico interactivo"></div>
+            <p class="activity-feedback" id="number-path-feedback" role="status" aria-live="polite"></p>
+          </div>
+          <div class="math-playground hidden" id="math-playground">
+            <p class="activity-prompt" id="math-instruction"></p>
+            <div class="math-groups" id="math-groups"></div>
+            <p class="activity-feedback" id="math-feedback" role="status" aria-live="polite"></p>
+            <button class="helper-reset hidden" id="math-reset" type="button">Volver a empezar ↻</button>
+          </div>
+          <div class="count-helper hidden" id="count-helper">
+            <p id="count-instruction">Toca cada fruta mientras cuentas.</p>
+            <p class="count-tally" id="count-tally" role="status" aria-live="polite">Has contado 0 frutas.</p>
+          </div>
+          <div class="answer-options" id="answer-options" role="group" aria-label="Elige una respuesta"></div>
+          <div class="answer-feedback" id="answer-feedback" role="status" aria-live="polite"></div>
+        </div>
+        <div class="game-footer">
+          <span>🌱 Cada intento te ayuda a aprender.</span>
+          <span id="level-earned-preview">⭐ 0</span>
+        </div>
+      </section>
+
+      <section class="screen celebration-screen hidden" id="screen-celebration" aria-labelledby="celebration-title">
+        <div class="celebration-card">
+          <div class="celebration-art" aria-hidden="true">
+            <span class="celebration-animal">🐵</span>
+            <span class="celebration-star star-a">⭐</span>
+            <span class="celebration-star star-b">✨</span>
+            <span class="celebration-star star-c">🌟</span>
+            <span class="celebration-animal side-animal">🦜</span>
+          </div>
+          <span class="eyebrow" id="celebration-kicker">¡Nivel completado!</span>
+          <h1 id="celebration-title">¡Lo lograste!</h1>
+          <p id="celebration-message">¡La jungla celebra contigo!</p>
+          <div class="reward-row">
+            <div class="reward-badge"><span aria-hidden="true" id="earned-stars">⭐⭐⭐</span><strong id="earned-points">+50 puntos</strong></div>
+            <div class="reward-badge"><span aria-hidden="true" id="earned-medal">🏅</span><strong id="earned-medal-label">Medalla exploradora</strong></div>
+          </div>
+          <div class="celebration-actions">
+            <button class="primary-button" id="next-level-button" type="button">Siguiente nivel →</button>
+            <button class="secondary-button" type="button" data-action="show-map">Volver al mapa</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen final-screen hidden" id="screen-final" aria-labelledby="final-title">
+        <div class="celebration-card final-card">
+          <div class="final-art" aria-hidden="true">🏆 <span>🐵</span> 🎉</div>
+          <span class="eyebrow">¡Gran explorador!</span>
+          <h1 id="final-title">¡Salvaste la jungla!</h1>
+          <p>Terminaste los 10 niveles. ¡Eres increíble y sabes un montón de matemáticas!</p>
+          <div class="final-stats">
+            <div><strong id="final-points">0</strong><span>puntos</span></div>
+            <div><strong id="final-stars">0</strong><span>estrellas</span></div>
+            <div><strong id="final-medals">0</strong><span>medallas</span></div>
+          </div>
+          <button class="primary-button" type="button" data-action="replay">¡Jugar de nuevo! 🔄</button>
+          <button class="secondary-button" type="button" data-action="show-map">Ver mi mapa</button>
+        </div>
+      </section>
+    </main>
+    <footer class="page-footer">
+      <span>Hecho para aprender jugando</span>
+      <span aria-hidden="true">🌿 🐒 🍊 🌼</span>
+      <span>¡Tú puedes, explorador!</span>
+    </footer>
+    <div class="sr-only" id="announcements" aria-live="polite"></div>
+  </div>
+</body>
+</html>
